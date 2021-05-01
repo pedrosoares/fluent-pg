@@ -1,4 +1,4 @@
-import FilterBuilder from "./FilterBuilder";
+import { FilterBuilder } from "./filter.builder";
 
 class SelectBuilder {
 
@@ -59,4 +59,4 @@ class SelectBuilder {
 
 }
 
-export default SelectBuilder;
+export { SelectBuilder };

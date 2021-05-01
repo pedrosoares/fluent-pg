@@ -3,11 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.DeleteBuilder = void 0;
 
-var _FilterBuilder = _interopRequireDefault(require("./FilterBuilder"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _filter = require("./filter.builder");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31,7 +29,7 @@ var DeleteBuilder = /*#__PURE__*/function () {
   }, {
     key: "parse",
     value: function parse() {
-      var whereBuilder = new _FilterBuilder["default"](this.filters);
+      var whereBuilder = new _filter.FilterBuilder(this.filters);
       var whereBuilt = whereBuilder.parse();
       return {
         sql: "DELETE FROM ".concat(this.tablerize(this.table), " ").concat(whereBuilt.sql).trim(),
@@ -43,5 +41,4 @@ var DeleteBuilder = /*#__PURE__*/function () {
   return DeleteBuilder;
 }();
 
-var _default = DeleteBuilder;
-exports["default"] = _default;
+exports.DeleteBuilder = DeleteBuilder;

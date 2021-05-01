@@ -52,4 +52,4 @@ class FilterBuilder {
 
 }
 
-export default FilterBuilder;
+export { FilterBuilder };

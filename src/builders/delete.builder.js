@@ -1,4 +1,4 @@
-import FilterBuilder from "./FilterBuilder";
+import { FilterBuilder } from "./filter.builder";
 
 class DeleteBuilder {
 
@@ -25,4 +25,4 @@ class DeleteBuilder {
 
 }
 
-export default DeleteBuilder;
+export { DeleteBuilder };

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
+exports.FilterBuilder = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -96,5 +96,4 @@ var FilterBuilder = /*#__PURE__*/function () {
   return FilterBuilder;
 }();
 
-var _default = FilterBuilder;
-exports["default"] = _default;
+exports.FilterBuilder = FilterBuilder;

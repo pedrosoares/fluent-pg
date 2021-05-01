@@ -1,4 +1,4 @@
-import FilterBuilder from "./FilterBuilder";
+import { FilterBuilder } from "./filter.builder";
 
 class UpdateBuilder {
 
@@ -51,4 +51,4 @@ class UpdateBuilder {
 
 }
 
-export default UpdateBuilder;
+export { UpdateBuilder };

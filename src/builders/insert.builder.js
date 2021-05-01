@@ -21,4 +21,4 @@ class InsertBuilder {
 
 }
 
-export default InsertBuilder;
+export { InsertBuilder };

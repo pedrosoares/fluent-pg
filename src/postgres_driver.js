@@ -1,20 +1,17 @@
 import { Pool } from "pg";
-import SelectBuilder from "./Postgres/SelectBuilder";
-import InsertBuilder from "./Postgres/InsertBuilder";
-import DeleteBuilder from "./Postgres/DeleteBuilder";
-import UpdateBuilder from "./Postgres/UpdateBuilder";
-import {uuidv4} from "./helper";
+import { uuidv4 } from "./helper";
+import { SelectBuilder } from "./builders/select.builder";
+import { InsertBuilder } from "./builders/insert.builder";
+import { DeleteBuilder } from "./builders/delete.builder";
+import { UpdateBuilder } from "./builders/update.builder";
 
 const transactions = {};
 
 class PostgresDriver {
 
-    constructor(connections) {
-        const options = Object.assign({}, {
-            ...connections['pgsql']
-        });
-        delete options.driver;
-        this.pool = new Pool(options);
+    constructor(configurator) {
+        this.configurator = configurator;
+        this.pool = null;
     }
 
     async query(options, sql, params = []) {
@@ -33,9 +30,17 @@ class PostgresDriver {
         return { affectedRows: response.rowCount };
     }
 
-    getConnection(options={}) {
+    async getConnection(options={}) {
         if(options.hasOwnProperty("transaction")) return transactions[options.transaction];
-        else return this.pool;
+        if (!this.pool) {
+            const options_ = { ...this.configurator.get_connection_configuration(this.configurator.default_connection) };
+            if (options_.driver !== "pgsql") {
+                throw new Error(`Invalid driver (${options_.driver}) used on postgres`);
+            }
+            delete options_.driver;
+            this.pool = new Pool(options_);
+        }
+        return this.pool;
     }
 
     async commit(transaction) {
@@ -120,4 +125,4 @@ class PostgresDriver {
 
 }
 
-export default PostgresDriver;
+export { PostgresDriver };

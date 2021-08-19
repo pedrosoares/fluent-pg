@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import { PostgresDriver } from "./postgres_driver";
 
 export const configure = (fluent_configurator) => {

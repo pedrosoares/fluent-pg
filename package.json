@@ -1,6 +1,6 @@
 {
   "name": "fluent-pg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "PostgreSQL driver to fluent-orm",
   "main": "dist/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/pedrosoares/fluent-pg#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
+    "core-js": "^3.16.1",
     "pg": "^8.6.0"
   }
 }

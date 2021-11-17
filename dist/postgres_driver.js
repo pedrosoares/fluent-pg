@@ -36,9 +36,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var transactions = {};
 
 var PostgresDriver = /*#__PURE__*/function () {
-  function PostgresDriver(configurator) {
+  function PostgresDriver(connection_name, configurator) {
     _classCallCheck(this, PostgresDriver);
 
+    this.connection_name = connection_name;
     this.configurator = configurator;
     this.pool = null;
   }
@@ -142,7 +143,7 @@ var PostgresDriver = /*#__PURE__*/function () {
                   break;
                 }
 
-                options_ = _objectSpread({}, this.configurator.get_connection_configuration(this.configurator.default_connection));
+                options_ = _objectSpread({}, this.configurator.get_connection_configuration(this.connection_name || this.configurator.default_connection));
 
                 if (!(options_.driver !== "pgsql")) {
                   _context2.next = 7;

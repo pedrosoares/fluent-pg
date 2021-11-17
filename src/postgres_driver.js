@@ -9,7 +9,8 @@ const transactions = {};
 
 class PostgresDriver {
 
-    constructor(configurator) {
+    constructor(connection_name, configurator) {
+        this.connection_name = connection_name;
         this.configurator = configurator;
         this.pool = null;
     }
@@ -33,7 +34,11 @@ class PostgresDriver {
     async getConnection(options={}) {
         if(options.hasOwnProperty("transaction")) return transactions[options.transaction];
         if (!this.pool) {
-            const options_ = { ...this.configurator.get_connection_configuration(this.configurator.default_connection) };
+            const options_ = {
+                ...this.configurator.get_connection_configuration(
+                    this.connection_name || this.configurator.default_connection
+                )
+            };
             if (options_.driver !== "pgsql") {
                 throw new Error(`Invalid driver (${options_.driver}) used on postgres`);
             }

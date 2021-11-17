@@ -426,7 +426,9 @@ require("regenerator-runtime/runtime");
 var _postgres_driver = require("./postgres_driver");
 
 var configure = function configure(fluent_configurator) {
-  fluent_configurator.register_driver("pgsql", new _postgres_driver.PostgresDriver(fluent_configurator));
+  fluent_configurator.register_driver("pgsql", function (connection_name) {
+    return new _postgres_driver.PostgresDriver(connection_name, fluent_configurator);
+  });
 };
 
 exports.configure = configure;

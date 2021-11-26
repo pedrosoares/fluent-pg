@@ -90,7 +90,7 @@ var SelectBuilder = /*#__PURE__*/function (_Builder) {
     key: "parseOrder",
     value: function parseOrder() {
       if (!!this.order.column && !!this.order.direction) {
-        return "ORDER BY ".concat(this.tablerize(this.order.column), " ").concat(this.order.direction);
+        return "ORDER BY ".concat(this.columnrize(this.order.column), " ").concat(this.order.direction);
       }
 
       return "";

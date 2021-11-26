@@ -5,7 +5,12 @@ class Builder {
     }
 
     tablerize(column) {
-        const DEFAULT_SCHEMA = this.driver.configurator.default_schema || process.env.DEFAULT_SCHEMA;
+        const options_ = {
+            ...this.driver.configurator.get_connection_configuration(
+                this.driver.connection_name || this.driver.configurator.default_connection
+            )
+        };
+        const DEFAULT_SCHEMA = options_.default_schema || process.env.DEFAULT_SCHEMA;
         const clm = column
             // Split Schema from Table
             .split(".")

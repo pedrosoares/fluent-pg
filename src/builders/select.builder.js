@@ -1,8 +1,10 @@
+import { Builder } from "./builder";
 import { FilterBuilder } from "./filter.builder";
 
-class SelectBuilder {
+class SelectBuilder extends Builder {
 
     constructor(table, columns, filters, limit, order, groups){
+        super();
         this.table = table;
         this.columns = columns;
 
@@ -11,10 +13,6 @@ class SelectBuilder {
 
         this.limit = limit || {};
         this.order = order || {};
-    }
-
-    tablerize(column){
-        return `"${column}"`;
     }
 
     parse(){

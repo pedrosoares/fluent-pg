@@ -1,9 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.FilterBuilder = void 0;
+
+var _builder = require("./builder");
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -23,11 +27,33 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var FilterBuilder = /*#__PURE__*/function () {
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var FilterBuilder = /*#__PURE__*/function (_Builder) {
+  _inherits(FilterBuilder, _Builder);
+
+  var _super = _createSuper(FilterBuilder);
+
   function FilterBuilder(filters) {
+    var _this;
+
     _classCallCheck(this, FilterBuilder);
 
-    this.filters = filters;
+    _this = _super.call(this);
+    _this.filters = filters;
+    return _this;
   }
 
   _createClass(FilterBuilder, [{
@@ -47,20 +73,9 @@ var FilterBuilder = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "columnrize",
-    value: function columnrize(column) {
-      return "\"".concat(column, "\"");
-    }
-  }, {
-    key: "comparize",
-    value: function comparize(compare) {
-      //TODO validate all comparation types
-      return compare;
-    }
-  }, {
     key: "parse",
     value: function parse() {
-      var _this = this;
+      var _this2 = this;
 
       var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       if (this.filters.length === 0) return "";
@@ -68,19 +83,19 @@ var FilterBuilder = /*#__PURE__*/function () {
 
       var parseFunction = function parseFunction(filter) {
         if (filter instanceof Object && !!filter.filter) {
-          var type = _this.typerize(filter.type);
+          var type = _this2.typerize(filter.type);
 
           return ["".concat(type, " (")].concat(_toConsumableArray(filter.filter.map(parseFunction)), [') ']).join('');
         } else if (filter instanceof Object && !!filter.raw) {
-          var _type = _this.typerize(filter.type);
+          var _type = _this2.typerize(filter.type);
 
           return "".concat(_type, " ").concat(filter.raw);
         } else if (filter instanceof Object) {
-          var _type2 = _this.typerize(filter.type);
+          var _type2 = _this2.typerize(filter.type);
 
-          var column = _this.columnrize(filter.column);
+          var column = _this2.columnrize(filter.column);
 
-          var compare = _this.comparize(filter.compare);
+          var compare = _this2.comparize(filter.compare);
 
           values.push(filter.value);
           return "".concat(_type2, " ").concat(column, " ").concat(compare, " $").concat(++i);
@@ -98,6 +113,6 @@ var FilterBuilder = /*#__PURE__*/function () {
   }]);
 
   return FilterBuilder;
-}();
+}(_builder.Builder);
 
 exports.FilterBuilder = FilterBuilder;

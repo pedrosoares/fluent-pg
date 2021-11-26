@@ -1,13 +1,12 @@
-class InsertBuilder {
+import { Builder } from "./builder";
+
+class InsertBuilder extends Builder {
 
     constructor(table, columns, values) {
+        super();
         this.table = table;
         this.columns = columns;
         this.values = values;
-    }
-
-    tablerize(column) {
-        return `"${column}"`;
     }
 
     parse() {

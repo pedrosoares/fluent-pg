@@ -1,6 +1,9 @@
-class FilterBuilder {
+import { Builder } from "./builder";
+
+class FilterBuilder extends Builder {
 
     constructor(filters){
+        super();
         this.filters = filters;
     }
 
@@ -14,15 +17,6 @@ class FilterBuilder {
             default:
                 throw new Error("Invalid filter type");
         }
-    }
-
-    columnrize(column){
-        return `"${column}"`;
-    }
-
-    comparize(compare){
-        //TODO validate all comparation types
-        return compare;
     }
 
     parse(i = 0) {

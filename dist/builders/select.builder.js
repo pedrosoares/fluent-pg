@@ -1,9 +1,13 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.SelectBuilder = void 0;
+
+var _builder = require("./builder");
 
 var _filter = require("./filter.builder");
 
@@ -13,35 +17,52 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var SelectBuilder = /*#__PURE__*/function () {
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var SelectBuilder = /*#__PURE__*/function (_Builder) {
+  _inherits(SelectBuilder, _Builder);
+
+  var _super = _createSuper(SelectBuilder);
+
   function SelectBuilder(table, columns, filters, limit, order, groups) {
+    var _this;
+
     _classCallCheck(this, SelectBuilder);
 
-    this.table = table;
-    this.columns = columns;
-    this.filters = filters;
-    this.groups = groups;
-    this.limit = limit || {};
-    this.order = order || {};
+    _this = _super.call(this);
+    _this.table = table;
+    _this.columns = columns;
+    _this.filters = filters;
+    _this.groups = groups;
+    _this.limit = limit || {};
+    _this.order = order || {};
+    return _this;
   }
 
   _createClass(SelectBuilder, [{
-    key: "tablerize",
-    value: function tablerize(column) {
-      return "\"".concat(column, "\"");
-    }
-  }, {
     key: "parse",
     value: function parse() {
-      var _this = this;
+      var _this2 = this;
 
       var whereBuilder = new _filter.FilterBuilder(this.filters);
       var data = this.columns.map(function (col, index) {
-        return "".concat(col).concat(index >= _this.columns.length - 1 ? '' : ', ');
+        return "".concat(col).concat(index >= _this2.columns.length - 1 ? '' : ', ');
       }).join('');
       var whereBuilded = whereBuilder.parse();
       var groups = "".concat(this.groups.length > 0 ? ' GROUP BY ' : '').concat(this.groups.map(function (a) {
-        return _this.tablerize(a);
+        return _this2.tablerize(a);
       }).join(','));
       return {
         sql: "SELECT ".concat(data, " FROM ").concat(this.tablerize(this.table), " ").concat(whereBuilded ? whereBuilded.sql : "", " ").concat(groups, " ").concat(this.parseOrder(), " ").concat(this.parseLimit()).trim(),
@@ -76,6 +97,6 @@ var SelectBuilder = /*#__PURE__*/function () {
   }]);
 
   return SelectBuilder;
-}();
+}(_builder.Builder);
 
 exports.SelectBuilder = SelectBuilder;

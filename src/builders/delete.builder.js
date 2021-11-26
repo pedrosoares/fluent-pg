@@ -1,15 +1,12 @@
+import { Builder } from "./builder";
 import { FilterBuilder } from "./filter.builder";
 
-class DeleteBuilder {
+class DeleteBuilder extends Builder {
 
     constructor(table, filters) {
+        super();
         this.table = table;
-
         this.filters = filters;
-    }
-
-    tablerize(column) {
-        return `"${column}"`;
     }
 
     parse() {

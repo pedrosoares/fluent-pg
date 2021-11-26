@@ -53,7 +53,7 @@ var InsertBuilder = /*#__PURE__*/function (_Builder) {
 
       var index = 0;
       var fields = this.columns.map(function (c) {
-        return _this2.tablerize(c);
+        return _this2.columnrize(c);
       }).join(',');
       var values = this.values.map(function () {
         return "(".concat(_this2.columns.map(function () {

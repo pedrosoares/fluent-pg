@@ -11,7 +11,7 @@ class InsertBuilder extends Builder {
 
     parse() {
         let index = 0;
-        const fields = this.columns.map(c => this.tablerize(c)).join(',');
+        const fields = this.columns.map(c => this.columnrize(c)).join(',');
         const values = this.values.map(() => `(${
             this.columns.map(() => `$${++index}`).join(", ")
         })`).join(', ');

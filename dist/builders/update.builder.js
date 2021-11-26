@@ -36,12 +36,12 @@ var UpdateBuilder = /*#__PURE__*/function (_Builder) {
 
   var _super = _createSuper(UpdateBuilder);
 
-  function UpdateBuilder(table, columns, filters, limit, order) {
+  function UpdateBuilder(driver, table, columns, filters, limit, order) {
     var _this;
 
     _classCallCheck(this, UpdateBuilder);
 
-    _this = _super.call(this);
+    _this = _super.call(this, driver);
     _this.table = table;
     _this.columns = columns;
     _this.filters = filters;

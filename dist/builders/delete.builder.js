@@ -36,12 +36,12 @@ var DeleteBuilder = /*#__PURE__*/function (_Builder) {
 
   var _super = _createSuper(DeleteBuilder);
 
-  function DeleteBuilder(table, filters) {
+  function DeleteBuilder(driver, table, filters) {
     var _this;
 
     _classCallCheck(this, DeleteBuilder);
 
-    _this = _super.call(this);
+    _this = _super.call(this, driver);
     _this.table = table;
     _this.filters = filters;
     return _this;

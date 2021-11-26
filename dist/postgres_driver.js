@@ -342,22 +342,22 @@ var PostgresDriver = /*#__PURE__*/function () {
   }, {
     key: "parseSelect",
     value: function parseSelect(table, columns, filters, limit, order, groups) {
-      return new _select.SelectBuilder(table, columns, filters, limit, order, groups).parse();
+      return new _select.SelectBuilder(this, table, columns, filters, limit, order, groups).parse();
     }
   }, {
     key: "parseInsert",
     value: function parseInsert(table, columns, values) {
-      return new _insert.InsertBuilder(table, columns, values).parse();
+      return new _insert.InsertBuilder(this, table, columns, values).parse();
     }
   }, {
     key: "parseDelete",
     value: function parseDelete(table, filters) {
-      return new _delete.DeleteBuilder(table, filters).parse();
+      return new _delete.DeleteBuilder(this, table, filters).parse();
     }
   }, {
     key: "parseUpdate",
     value: function parseUpdate(table, columns, filters, limit, order) {
-      return new _update.UpdateBuilder(table, columns, filters, limit, order).parse();
+      return new _update.UpdateBuilder(this, table, columns, filters, limit, order).parse();
     }
   }]);
 

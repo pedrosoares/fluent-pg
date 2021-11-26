@@ -34,12 +34,12 @@ var InsertBuilder = /*#__PURE__*/function (_Builder) {
 
   var _super = _createSuper(InsertBuilder);
 
-  function InsertBuilder(table, columns, values) {
+  function InsertBuilder(driver, table, columns, values) {
     var _this;
 
     _classCallCheck(this, InsertBuilder);
 
-    _this = _super.call(this);
+    _this = _super.call(this, driver);
     _this.table = table;
     _this.columns = columns;
     _this.values = values;

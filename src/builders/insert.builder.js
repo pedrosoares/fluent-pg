@@ -2,8 +2,8 @@ import { Builder } from "./builder";
 
 class InsertBuilder extends Builder {
 
-    constructor(table, columns, values) {
-        super();
+    constructor(driver, table, columns, values) {
+        super(driver);
         this.table = table;
         this.columns = columns;
         this.values = values;

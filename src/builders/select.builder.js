@@ -3,8 +3,8 @@ import { FilterBuilder } from "./filter.builder";
 
 class SelectBuilder extends Builder {
 
-    constructor(table, columns, filters, limit, order, groups){
-        super();
+    constructor(driver, table, columns, filters, limit, order, groups){
+        super(driver);
         this.table = table;
         this.columns = columns;
 

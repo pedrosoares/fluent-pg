@@ -2,8 +2,8 @@ import { Builder } from "./builder";
 
 class FilterBuilder extends Builder {
 
-    constructor(filters){
-        super();
+    constructor(driver, filters){
+        super(driver);
         this.filters = filters;
     }
 

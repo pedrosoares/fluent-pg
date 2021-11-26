@@ -46,12 +46,12 @@ var FilterBuilder = /*#__PURE__*/function (_Builder) {
 
   var _super = _createSuper(FilterBuilder);
 
-  function FilterBuilder(filters) {
+  function FilterBuilder(driver, filters) {
     var _this;
 
     _classCallCheck(this, FilterBuilder);
 
-    _this = _super.call(this);
+    _this = _super.call(this, driver);
     _this.filters = filters;
     return _this;
   }

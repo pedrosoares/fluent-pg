@@ -3,8 +3,8 @@ import { FilterBuilder } from "./filter.builder";
 
 class UpdateBuilder extends Builder {
 
-    constructor(table, columns, filters, limit, order){
-        super();
+    constructor(driver, table, columns, filters, limit, order){
+        super(driver);
         this.table = table;
         this.columns = columns;
 

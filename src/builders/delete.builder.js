@@ -3,8 +3,8 @@ import { FilterBuilder } from "./filter.builder";
 
 class DeleteBuilder extends Builder {
 
-    constructor(table, filters) {
-        super();
+    constructor(driver, table, filters) {
+        super(driver);
         this.table = table;
         this.filters = filters;
     }

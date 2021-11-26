@@ -12,18 +12,29 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Builder = /*#__PURE__*/function () {
-  function Builder() {
+  function Builder(driver) {
     _classCallCheck(this, Builder);
+
+    this.driver = driver || {
+      configurator: {}
+    };
   }
 
   _createClass(Builder, [{
     key: "tablerize",
     value: function tablerize(column) {
-      return column // Split Schema from Table
+      var DEFAULT_SCHEMA = this.driver.configurator.default_schema || process.env.DEFAULT_SCHEMA;
+      var clm = column // Split Schema from Table
       .split(".") // Remove Empty
       .filter(function (f) {
         return !!f;
-      }) // Add quotes from database
+      });
+
+      if (clm.length === 1 && DEFAULT_SCHEMA) {
+        return "\"".concat(DEFAULT_SCHEMA, "\".\"").concat(clm.pop(), "\"");
+      }
+
+      return clm // Add quotes from database
       .map(function (f) {
         return "\"".concat(f, "\"");
       }) // Re-Join Schema/Table

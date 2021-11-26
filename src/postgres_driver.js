@@ -113,19 +113,19 @@ class PostgresDriver {
     }
 
     parseSelect(table, columns, filters, limit, order, groups){
-        return (new SelectBuilder(table, columns, filters, limit, order, groups)).parse();
+        return (new SelectBuilder(this, table, columns, filters, limit, order, groups)).parse();
     }
 
     parseInsert(table, columns, values){
-        return (new InsertBuilder(table, columns, values)).parse();
+        return (new InsertBuilder(this, table, columns, values)).parse();
     }
 
     parseDelete(table, filters){
-        return (new DeleteBuilder(table, filters)).parse();
+        return (new DeleteBuilder(this, table, filters)).parse();
     }
 
     parseUpdate(table, columns, filters, limit, order){
-        return (new UpdateBuilder(table, columns, filters, limit, order)).parse();
+        return (new UpdateBuilder(this, table, columns, filters, limit, order)).parse();
     }
 
 }

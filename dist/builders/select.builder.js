@@ -36,12 +36,12 @@ var SelectBuilder = /*#__PURE__*/function (_Builder) {
 
   var _super = _createSuper(SelectBuilder);
 
-  function SelectBuilder(table, columns, filters, limit, order, groups) {
+  function SelectBuilder(driver, table, columns, filters, limit, order, groups) {
     var _this;
 
     _classCallCheck(this, SelectBuilder);
 
-    _this = _super.call(this);
+    _this = _super.call(this, driver);
     _this.table = table;
     _this.columns = columns;
     _this.filters = filters;

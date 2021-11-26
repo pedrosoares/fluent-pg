@@ -42,6 +42,7 @@ var UpdateBuilder = /*#__PURE__*/function (_Builder) {
     _classCallCheck(this, UpdateBuilder);
 
     _this = _super.call(this, driver);
+    _this.driver = driver;
     _this.table = table;
     _this.columns = columns;
     _this.filters = filters;
@@ -53,7 +54,7 @@ var UpdateBuilder = /*#__PURE__*/function (_Builder) {
   _createClass(UpdateBuilder, [{
     key: "parse",
     value: function parse() {
-      var whereBuilder = new _filter.FilterBuilder(this.filters);
+      var whereBuilder = new _filter.FilterBuilder(this.driver, this.filters);
       var columns = Object.keys(this.columns);
       var values = Object.values(this.columns);
       var data = columns.map(function (col, index) {

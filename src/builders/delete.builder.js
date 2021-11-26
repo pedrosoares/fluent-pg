@@ -5,12 +5,13 @@ class DeleteBuilder extends Builder {
 
     constructor(driver, table, filters) {
         super(driver);
+        this.driver = driver;
         this.table = table;
         this.filters = filters;
     }
 
     parse() {
-        const whereBuilder = new FilterBuilder(this.filters);
+        const whereBuilder = new FilterBuilder(this.driver, this.filters);
 
         const whereBuilt = whereBuilder.parse();
 

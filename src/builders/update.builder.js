@@ -5,6 +5,7 @@ class UpdateBuilder extends Builder {
 
     constructor(driver, table, columns, filters, limit, order){
         super(driver);
+        this.driver = driver;
         this.table = table;
         this.columns = columns;
 
@@ -15,7 +16,7 @@ class UpdateBuilder extends Builder {
     }
 
     parse() {
-        const whereBuilder = new FilterBuilder(this.filters);
+        const whereBuilder = new FilterBuilder(this.driver, this.filters);
 
         const columns = Object.keys(this.columns);
         const values = Object.values(this.columns);

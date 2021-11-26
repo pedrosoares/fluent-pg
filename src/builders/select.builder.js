@@ -5,6 +5,7 @@ class SelectBuilder extends Builder {
 
     constructor(driver, table, columns, filters, limit, order, groups){
         super(driver);
+        this.driver = driver;
         this.table = table;
         this.columns = columns;
 
@@ -16,7 +17,7 @@ class SelectBuilder extends Builder {
     }
 
     parse(){
-        const whereBuilder = new FilterBuilder(this.filters);
+        const whereBuilder = new FilterBuilder(this.driver, this.filters);
 
         const data = this.columns.map((col, index) =>
             `${col}${index >= (this.columns.length-1) ? '' : ', '}`

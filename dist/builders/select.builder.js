@@ -42,6 +42,7 @@ var SelectBuilder = /*#__PURE__*/function (_Builder) {
     _classCallCheck(this, SelectBuilder);
 
     _this = _super.call(this, driver);
+    _this.driver = driver;
     _this.table = table;
     _this.columns = columns;
     _this.filters = filters;
@@ -56,7 +57,7 @@ var SelectBuilder = /*#__PURE__*/function (_Builder) {
     value: function parse() {
       var _this2 = this;
 
-      var whereBuilder = new _filter.FilterBuilder(this.filters);
+      var whereBuilder = new _filter.FilterBuilder(this.driver, this.filters);
       var data = this.columns.map(function (col, index) {
         return "".concat(col).concat(index >= _this2.columns.length - 1 ? '' : ', ');
       }).join('');

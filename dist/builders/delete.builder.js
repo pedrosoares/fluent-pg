@@ -42,6 +42,7 @@ var DeleteBuilder = /*#__PURE__*/function (_Builder) {
     _classCallCheck(this, DeleteBuilder);
 
     _this = _super.call(this, driver);
+    _this.driver = driver;
     _this.table = table;
     _this.filters = filters;
     return _this;
@@ -50,7 +51,7 @@ var DeleteBuilder = /*#__PURE__*/function (_Builder) {
   _createClass(DeleteBuilder, [{
     key: "parse",
     value: function parse() {
-      var whereBuilder = new _filter.FilterBuilder(this.filters);
+      var whereBuilder = new _filter.FilterBuilder(this.driver, this.filters);
       var whereBuilt = whereBuilder.parse();
       return {
         sql: "DELETE FROM ".concat(this.tablerize(this.table), " ").concat(whereBuilt.sql).trim(),

@@ -29,6 +29,11 @@ class FilterBuilder extends Builder {
             } else if(filter instanceof Object && !!filter.raw) {
                 const type = this.typerize(filter.type);
                 return `${type} ${filter.raw}`;
+            } else if(filter instanceof Object && !filter.value) {
+                const type = this.typerize(filter.type);
+                const column = this.columnrize(filter.column);
+                const compare = this.comparize(filter.compare);
+                return `${type} ${column} ${compare}`;
             } else if(filter instanceof Object){
                 const type = this.typerize(filter.type);
                 const column = this.columnrize(filter.column);

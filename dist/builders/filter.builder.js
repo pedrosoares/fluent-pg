@@ -90,15 +90,23 @@ var FilterBuilder = /*#__PURE__*/function (_Builder) {
           var _type = _this2.typerize(filter.type);
 
           return "".concat(_type, " ").concat(filter.raw);
-        } else if (filter instanceof Object) {
+        } else if (filter instanceof Object && !filter.value) {
           var _type2 = _this2.typerize(filter.type);
 
           var column = _this2.columnrize(filter.column);
 
           var compare = _this2.comparize(filter.compare);
 
+          return "".concat(_type2, " ").concat(column, " ").concat(compare);
+        } else if (filter instanceof Object) {
+          var _type3 = _this2.typerize(filter.type);
+
+          var _column = _this2.columnrize(filter.column);
+
+          var _compare = _this2.comparize(filter.compare);
+
           values.push(filter.value);
-          return "".concat(_type2, " ").concat(column, " ").concat(compare, " $").concat(++i);
+          return "".concat(_type3, " ").concat(_column, " ").concat(_compare, " $").concat(++i);
         } else {
           throw new Error("Invalid filter object type");
         }

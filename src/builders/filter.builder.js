@@ -28,7 +28,14 @@ class FilterBuilder extends Builder {
                 return [ `${type} (`, ...filter.filter.map(parseFunction), ') ' ].join('');
             } else if(filter instanceof Object && !!filter.raw) {
                 const type = this.typerize(filter.type);
-                return `${type} ${filter.raw}`;
+                let raw = filter.raw;
+                if (!!filter.args && filter.args.length > 0) {
+                    filter.args.forEach((argument, index) => {
+                        values.push(argument);
+                        raw = raw.split(`$${index + 1}`).join(`$${++i}`);
+                    });
+                }
+                return `${type} ${raw}`;
             } else if(filter instanceof Object && !filter.value) {
                 const type = this.typerize(filter.type);
                 const column = this.columnrize(filter.column);

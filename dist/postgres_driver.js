@@ -95,7 +95,7 @@ var PostgresDriver = /*#__PURE__*/function () {
 
                 return _context.abrupt("return", {
                   affectedRows: response.rowCount,
-                  insertId: response.rows[0].id
+                  insertId: response.rows && response.rows.length > 0 ? response.rows[0].id || null : null
                 });
 
               case 14:

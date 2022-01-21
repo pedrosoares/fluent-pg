@@ -27,7 +27,10 @@ class PostgresDriver {
         };
         const response = await connection.query(sql, parseParam(params));
         if (response.command === "SELECT") return response.rows;
-        else if (response.command === "INSERT") return { affectedRows: response.rowCount, insertId: response.rows[0].id };
+        else if (response.command === "INSERT") return {
+            affectedRows: response.rowCount,
+            insertId: response.rows && response.rows.length > 0 ? response.rows[0].id || null : null
+        };
         return { affectedRows: response.rowCount };
     }
 

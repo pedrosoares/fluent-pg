@@ -1,9 +1,17 @@
-import { Builder } from "./builder";
-import { FilterBuilder } from "./filter.builder";
+import { Builder, Driver } from "./builder";
+import {FilterBuilder} from "./filter.builder";
 
+// @ts-ignore
 class UpdateBuilder extends Builder {
 
-    constructor(driver, table, columns, filters, limit, order){
+    private driver: any;
+    private table: string;
+    private columns: any[];
+    private filters: any[];
+    private limit: any;
+    private order: any;
+
+    constructor(driver: Driver, table: any, columns: any, filters: any, limit: {}, order: {}){
         super(driver);
         this.driver = driver;
         this.table = table;

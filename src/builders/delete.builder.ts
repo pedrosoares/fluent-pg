@@ -1,9 +1,14 @@
-import { Builder } from "./builder";
+import { Builder, Driver } from "./builder";
 import { FilterBuilder } from "./filter.builder";
 
+// @ts-ignore
 class DeleteBuilder extends Builder {
 
-    constructor(driver, table, filters) {
+    private driver: any;
+    private table: string;
+    private filters: any[];
+
+    constructor(driver: Driver, table: string, filters: any[]) {
         super(driver);
         this.driver = driver;
         this.table = table;

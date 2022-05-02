@@ -1,10 +1,13 @@
-class Builder {
+export interface Driver { configurator: any };
 
-    constructor(driver) {
+class Builder {
+    private driver: { configurator: any, connection_name?: string };
+
+    constructor(driver: Driver) {
         this.driver = driver || { configurator: {} };
     }
 
-    tablerize(column) {
+    tablerize(column: string) {
         const options_ = {
             ...this.driver.configurator.get_connection_configuration(
                 this.driver.connection_name || this.driver.configurator.default_connection
@@ -28,11 +31,11 @@ class Builder {
             .join(".");
     }
 
-    columnrize(column){
+    columnrize(column: string){
         return `"${column}"`;
     }
 
-    comparize(compare){
+    comparize(compare: any){
         //TODO validate all comparation types
         return compare;
     }

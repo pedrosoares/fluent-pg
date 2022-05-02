@@ -1,8 +1,12 @@
-import { Builder } from "./builder";
+import { Builder, Driver} from "./builder";
 
 class InsertBuilder extends Builder {
 
-    constructor(driver, table, columns, values) {
+    private table: string;
+    private columns: any[];
+    private values: any;
+
+    constructor(driver: Driver, table: any, columns: any, values: any) {
         super(driver);
         this.table = table;
         this.columns = columns;

@@ -1,9 +1,17 @@
 import { Builder } from "./builder";
 import { FilterBuilder } from "./filter.builder";
 
+// @ts-ignore
 class SelectBuilder extends Builder {
+    private driver: any;
+    private table: string;
+    private columns: any[];
+    private filters: any[];
+    private groups: any;
+    private limit: any;
+    private order: any;
 
-    constructor(driver, table, columns, filters, limit, order, groups){
+    constructor(driver: any, table: string, columns: any[], filters: any[], limit: any, order: any, groups: any) {
         super(driver);
         this.driver = driver;
         this.table = table;
@@ -23,12 +31,12 @@ class SelectBuilder extends Builder {
             `${col}${index >= (this.columns.length-1) ? '' : ', '}`
         ).join('');
 
-        const whereBuilded = whereBuilder.parse();
+        const whereBuilded: any = whereBuilder.parse();
 
         const groups = `${
             this.groups.length > 0 ? ' GROUP BY ' : ''
         }${
-            this.groups.map(a => this.tablerize(a)).join(',')
+            this.groups.map((a: any) => this.tablerize(a)).join(',')
         }`;
 
         return {

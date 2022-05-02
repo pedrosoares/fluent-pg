@@ -1,13 +1,14 @@
-import { Builder } from "./builder";
+import {Builder, Driver} from "./builder";
 
 class FilterBuilder extends Builder {
+    private filters: any;
 
-    constructor(driver, filters){
+    constructor(driver: Driver, filters: any){
         super(driver);
         this.filters = filters;
     }
 
-    typerize(type){
+    typerize(type: string){
         if(!type) return '';
         switch (type){
             case 'and':
@@ -19,10 +20,10 @@ class FilterBuilder extends Builder {
         }
     }
 
-    parse(i = 0) {
+    parse(i = 0): any {
         if(this.filters.length === 0) return "";
-        const values = [];
-        const parseFunction = (filter) => {
+        const values: any = [];
+        const parseFunction = (filter: any) => {
             if(filter instanceof Object && !!filter.filter){
                 const type = this.typerize(filter.type);
                 return [ `${type} (`, ...filter.filter.map(parseFunction), ') ' ].join('');
@@ -30,7 +31,7 @@ class FilterBuilder extends Builder {
                 const type = this.typerize(filter.type);
                 let raw = filter.raw;
                 if (!!filter.args && filter.args.length > 0) {
-                    filter.args.forEach((argument, index) => {
+                    filter.args.forEach((argument: any, index: any) => {
                         values.push(argument);
                         raw = raw.split(`$${index + 1}`).join(`$${++i}`);
                     });

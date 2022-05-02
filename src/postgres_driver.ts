@@ -1,25 +1,29 @@
 import { Pool } from "pg";
 import { uuidv4 } from "./helper";
+import { Driver } from "./builders/builder";
 import { SelectBuilder } from "./builders/select.builder";
 import { InsertBuilder } from "./builders/insert.builder";
 import { DeleteBuilder } from "./builders/delete.builder";
 import { UpdateBuilder } from "./builders/update.builder";
 
-const transactions = {};
+const transactions: any = {};
 
-class PostgresDriver {
+class PostgresDriver implements Driver {
+    public connection_name: string;
+    public configurator: any;
+    private pool: any;
 
-    constructor(connection_name, configurator) {
+    constructor(connection_name: string, configurator: any) {
         this.connection_name = connection_name;
         this.configurator = configurator;
         this.pool = null;
     }
 
-    async query(options, sql, params = []) {
+    async query(options: any, sql: string, params = []) {
         const connection = await this.getConnection(options);
-        const parseParam = (po) => {
-            let r = [];
-            po.forEach(e => {
+        const parseParam = (po: any) => {
+            let r: any[] = [];
+            po.forEach((e: any) => {
                 if (Array.isArray(e)) e.forEach(a => r = r.concat(a))
                 else r = r.concat(e);
             });
@@ -34,7 +38,7 @@ class PostgresDriver {
         return { affectedRows: response.rowCount };
     }
 
-    async getConnection(options={}) {
+    async getConnection(options: any = {}) {
         if(options.hasOwnProperty("transaction")) return transactions[options.transaction];
         if (!this.pool) {
             const options_ = {
@@ -51,7 +55,7 @@ class PostgresDriver {
         return this.pool;
     }
 
-    async commit(transaction) {
+    async commit(transaction: any) {
         // Validate if there is a transaction to handle
         if (!transactions.hasOwnProperty(transaction)) throw new Error("Transaction not found");
         // Get transaction connection
@@ -72,7 +76,7 @@ class PostgresDriver {
         }
     }
 
-    async rollback(transaction) {
+    async rollback(transaction: any) {
         // Validate if there is a transaction to handle
         if (!transactions.hasOwnProperty(transaction)) throw new Error("Transaction not found");
         // Get transaction connection
@@ -115,19 +119,19 @@ class PostgresDriver {
         }
     }
 
-    parseSelect(table, columns, filters, limit, order, groups){
+    parseSelect(table: string, columns: any[], filters: any[], limit: any, order: any, groups: any){
         return (new SelectBuilder(this, table, columns, filters, limit, order, groups)).parse();
     }
 
-    parseInsert(table, columns, values){
+    parseInsert(table: any, columns: any, values: any){
         return (new InsertBuilder(this, table, columns, values)).parse();
     }
 
-    parseDelete(table, filters){
+    parseDelete(table: any, filters: any){
         return (new DeleteBuilder(this, table, filters)).parse();
     }
 
-    parseUpdate(table, columns, filters, limit, order){
+    parseUpdate(table: any, columns: any, filters: any, limit: any, order: any){
         return (new UpdateBuilder(this, table, columns, filters, limit, order)).parse();
     }
 

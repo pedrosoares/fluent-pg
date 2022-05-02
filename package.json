@@ -1,10 +1,13 @@
 {
   "name": "fluent-pg",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "PostgreSQL driver to fluent-orm",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "build": "babel src --out-dir dist"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -16,12 +19,6 @@
     "JS",
     "Fluent"
   ],
-  "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/node": "^7.6.1",
-    "@babel/preset-env": "^7.6.0"
-  },
   "author": "Pedro Augusto da Silva Soares",
   "license": "MIT",
   "bugs": {
@@ -29,7 +26,10 @@
   },
   "homepage": "https://github.com/pedrosoares/fluent-pg#readme",
   "dependencies": {
-    "core-js": "^3.16.1",
-    "pg": "^8.6.0"
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.6.5",
+    "typescript": "^4.6.4"
   }
 }

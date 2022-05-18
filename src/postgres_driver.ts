@@ -98,6 +98,8 @@ class PostgresDriver implements Driver {
     async transaction() {
         // Generate a random UUID for this transaction
         const id = uuidv4();
+        // Validate if the pool was initialized
+        if (!this.pool) await this.getConnection();
         // Get a new connection on the POOL
         const client = await this.pool.connect();
         // Add Current connection tp transaction storage

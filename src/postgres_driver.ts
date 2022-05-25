@@ -33,7 +33,8 @@ class PostgresDriver implements Driver {
         if (response.command === "SELECT") return response.rows;
         else if (response.command === "INSERT") return {
             affectedRows: response.rowCount,
-            insertId: response.rows && response.rows.length > 0 ? response.rows[0].id || null : null
+            insertId: response.rows && response.rows.length > 0 ? response.rows[0].id || null : null,
+            data: response.rows && response.rows.length > 0 ? response.rows : null,
         };
         return { affectedRows: response.rowCount };
     }

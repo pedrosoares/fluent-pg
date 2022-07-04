@@ -31,7 +31,7 @@ class Builder {
             .join(".");
     }
 
-    columnrize(column: string){
+    columnrize(column: string | number) {
         return `"${column}"`;
     }
 

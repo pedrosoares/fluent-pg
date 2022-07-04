@@ -59,7 +59,8 @@ class SelectBuilder extends Builder {
 
     parseOrder(){
         if(!!this.order.column && !!this.order.direction) {
-            return `ORDER BY ${this.columnrize(this.order.column)} ${this.order.direction}`;
+            const column = typeof this.order.column === "number" ? this.order.column : this.columnrize(this.order.column);
+            return `ORDER BY ${column} ${this.order.direction}`;
         }
         return "";
     }

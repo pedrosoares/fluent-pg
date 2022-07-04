@@ -1,6 +1,6 @@
 {
   "name": "fluent-pg",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "PostgreSQL driver to fluent-orm",
   "main": "lib/index.js",
   "files": [

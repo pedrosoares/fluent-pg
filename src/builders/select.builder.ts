@@ -59,7 +59,7 @@ class SelectBuilder extends Builder {
 
     parseOrder(){
         if (Array.isArray(this.order)) {
-            return "ORDER BY " + this.order
+            const result = this.order
                 .map(order => {
                     if(!!order.column && !!order.direction) {
                         const column = typeof order.column === "number" ? order.column : this.columnrize(order.column);
@@ -70,8 +70,11 @@ class SelectBuilder extends Builder {
                     }
                     return null;
                 })
-                .filter(val => !!val)
-                .join(", ");
+                .filter(val => !!val);
+            if (result.length > 0) {
+                return "ORDER BY " + result.join(", ");
+            }
+            return "";
         }
         if(!!this.order.column && !!this.order.direction) {
             const column = typeof this.order.column === "number" ? this.order.column : this.columnrize(this.order.column);

@@ -58,6 +58,21 @@ class SelectBuilder extends Builder {
     }
 
     parseOrder(){
+        if (Array.isArray(this.order)) {
+            return "ORDER BY " + this.order
+                .map(order => {
+                    if(!!order.column && !!order.direction) {
+                        const column = typeof order.column === "number" ? order.column : this.columnrize(order.column);
+                        return `${column} ${order.direction}`;
+                    }
+                    if (!!order.raw) {
+                        return `${order.raw}`;
+                    }
+                    return null;
+                })
+                .filter(val => !!val)
+                .join(", ");
+        }
         if(!!this.order.column && !!this.order.direction) {
             const column = typeof this.order.column === "number" ? this.order.column : this.columnrize(this.order.column);
             return `ORDER BY ${column} ${this.order.direction}`;

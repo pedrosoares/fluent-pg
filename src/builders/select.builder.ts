@@ -62,6 +62,9 @@ class SelectBuilder extends Builder {
             const column = typeof this.order.column === "number" ? this.order.column : this.columnrize(this.order.column);
             return `ORDER BY ${column} ${this.order.direction}`;
         }
+        if (!!this.order.raw) {
+            return `ORDER BY ${this.order.raw}`;
+        }
         return "";
     }
 
